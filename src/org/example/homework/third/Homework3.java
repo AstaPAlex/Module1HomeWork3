@@ -1,9 +1,30 @@
 package org.example.homework.third;
 
+import org.example.homework.third.exfive.City;
+import org.example.homework.third.exfive.House;
+import org.example.homework.third.exfour.LotteryTicket;
+import org.example.homework.third.exone.Birch;
+import org.example.homework.third.exone.Pine;
+import org.example.homework.third.exone.Pir;
+import org.example.homework.third.exone.Tree;
+import org.example.homework.third.exthree.Pyramid1;
+import org.example.homework.third.extwo.Factory;
+import org.example.homework.third.extwo.Iphone15;
+import org.example.homework.third.extwo.SamsungGalaxy;
+
 public class Homework3 {
     public static void main(String[] args) {
         //В этом дз уже будет проверятся наличие корректных модификаторов доступа
         //у классов, атрибутов, методов
+        ex1();
+        System.out.println("_______________________");
+        ex2();
+        System.out.println("_______________________");
+        ex3();
+        System.out.println("_______________________");
+        ex4();
+        System.out.println("_______________________");
+        ex5();
     }
 
     public static void ex1() {
@@ -23,6 +44,13 @@ public class Homework3 {
         //
         //Создать в методе ex1 сосну, березу, ель. Положить в массив.
         //Посчитать их средний возраст.
+        Tree[] trees = {new Pine(150), new Pir(346), new Birch(656)};
+        int sum = 0;
+        for (Tree tree : trees) {
+            sum += tree.getAge();
+        }
+        System.out.println((double) sum / trees.length);
+
     }
 
     public static void ex2() {
@@ -42,6 +70,9 @@ public class Homework3 {
         //В фабрике должно быть два публичных метода с одним названием:
         //один будет собирать iphone, второй будет собирать samsung.
         //В данном методе создать два телефона, собрать их, распечатать.
+        Factory factory = new Factory();
+        factory.assemblePhone(new SamsungGalaxy());
+        factory.assemblePhone(new Iphone15());
     }
 
     public static void ex3() {
@@ -66,6 +97,8 @@ public class Homework3 {
         // MMM
 
         //создать здесь pyramid1 и вызвать print
+        Pyramid1 pyramid1 = new Pyramid1();
+        pyramid1.printM();
     }
 
     public static void ex4() {
@@ -79,6 +112,11 @@ public class Homework3 {
         //
         //Создать здесь 100 билетов, и проверить по каждому удачу.
         //Итоговая сумма выигрыша после проверки удачи 100 билетов должна составить 6_000.
+        int sum = 0;
+        for (int i = 0; i < 100; i++) {
+            sum += new LotteryTicket().checkLuck();
+        }
+        System.out.println(sum);
     }
 
     public static void ex5() {
@@ -93,5 +131,16 @@ public class Homework3 {
         //Создать два дома, создать город с массивом созданных городов
         //При получении домов из массива, и изменении данных (например замена улицы) у дома,
         //у домов внутри city ничего не поменяется. Т.е. при вызове toString, будут старые имена улицы
+        House house1 = new House(1, "Ленина");
+        House house2 = new House(2, "Ленина");
+        House[] houses = {house1, house2};
+        City city = new City("Москва", houses);
+        System.out.println(city);
+        for (var house : city.getHouses()) {
+            house.setStreetName("Юбилейная");
+            house.setNumber(5);
+        }
+        System.out.println(city);
+
     }
 }
